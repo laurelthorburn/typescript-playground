@@ -84,7 +84,7 @@
 // //you have an empty function with unused parameters and no return, fctn never used either
 
 // //Alisas
-// //can reuse code in mutilpe places with a type alisas
+// //can reuse code in mutiple places with a type alisas
 // type Employee = {
 //     readonly id: number,
 //     name: string,
@@ -206,3 +206,63 @@
 
 // reject('...');
 // console.log('Blah')
+
+// Section 2 Exercises
+
+//Given the data below, define a type alias for representing users.
+
+type Users = {
+    name: string,
+    age: number,
+    occupation?: string
+};
+
+let users = [
+    {
+    name:'John Smith',
+    age:30,
+    occupation:'Software engineer'
+},
+{
+    name:'Kate Müller',
+    age:28
+}
+];
+
+//•Birds fly. Fish swim. A Pet can be a Bird or Fish. Use type aliases to represent these 
+
+type Bird = {
+    fly: () => void;
+}
+type Fish = {
+    swim: () => void;
+}
+
+type Pet = Bird | Fish;
+
+//•Define a type for representing the days of week. Valid values are “Monday”, “Tuesday”, etc.
+
+type DayOfWeek = 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday' | 'Sunday' ;
+
+//•Simplify the following code snippets:
+// let user = getUser();
+// console.log(user && user.address?user.address.street: undefined);
+let user = getUser();
+console.log(user?.address?.street);
+
+
+// let x = foo !== null && foo !== undefined ? foo:bar();
+
+let x = foo ?? bar();
+
+
+//•What is the problem in this piece of code?
+// let value: unknown = 'a'; 
+// console.log(value.toUpperCase());
+
+//value is set to unknown so you are calling a method that assumes it will be passed a string, what happens if it isn't? We need to use type narrowing to cartch the various types.. like  typeof === 'string' thennn you can use those string methods
+
+let value: unknown = 'a'; 
+if (typeof value === 'string')
+    console.log(value.toUpperCase());
+
