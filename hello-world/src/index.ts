@@ -269,133 +269,257 @@
 // OOP
 // method = function within an object
 
-//Creating Classes
+// //Creating Classes
 
-class Account {
-    // readonly id: number; //readonly aka no touchy
-    // owner: string;
-    // private _balance: number;
-    nickname?: string; //optional property
+// class Account {
+//     // readonly id: number; //readonly aka no touchy
+//     // owner: string;
+//     // private _balance: number;
+//     nickname?: string; //optional property
 
-    //constructor - special method inside class for intiializing an onject
-    constructor(
-        public readonly id: number,
-        public owner:string,
-        private _balance: number) {
-        // this.id = id;
-        // this.owner = owner;
-        // this._balance = balance;
-    }
-    deposit(amount:number): void {
-        if (amount <= 0)
-            throw new Error('Invalid amount');
-            //Record transaction
-        this._balance += amount;
-    }
-    get balance():number {
-        return this._balance;
-    }
-    // set balance(value: number){
-    //     if (value < 0)
-    //         throw new Error('Invalid Error');
-    //         this._balance = value;
-    // }
-    // private calculateTax(): void {
+//     //constructor - special method inside class for intiializing an onject
+//     constructor(
+//         public readonly id: number,
+//         public owner:string,
+//         private _balance: number) {
+//         // this.id = id;
+//         // this.owner = owner;
+//         // this._balance = balance;
+//     }
+//     deposit(amount:number): void {
+//         if (amount <= 0)
+//             throw new Error('Invalid amount');
+//             //Record transaction
+//         this._balance += amount;
+//     }
+//     get balance():number {
+//         return this._balance;
+//     }
+//     // set balance(value: number){
+//     //     if (value < 0)
+//     //         throw new Error('Invalid Error');
+//     //         this._balance = value;
+//     // }
+//     // private calculateTax(): void {
 
-    // }
-};
+//     // }
+// };
 
-//Creating Objects
-let account = new Account(1, 'Mosh', 0);
-account.deposit(100)
-// console.log(account._balance); //throws error now bc we made it private, created method above thatg returns it
-// console.log(account.getBalance());
-console.log(account.balance)
-console.log(typeof account);
-console.log(account instanceof Account);
+// //Creating Objects
+// let account = new Account(1, 'Mosh', 0);
+// account.deposit(100)
+// // console.log(account._balance); //throws error now bc we made it private, created method above thatg returns it
+// // console.log(account.getBalance());
+// console.log(account.balance)
+// console.log(typeof account);
+// console.log(account instanceof Account);
 
-//  account.balance = 1;
-
-
-//ready-only and optional properties
-
-//access control keywords
-//access modifiers: private, public, and protected
-// properties are public by default, when private get an error with code below
-//account.balance = -1; privatre is ONLY for writing robust code, not for storing 'private' data. by convention start name with _ when private
-
-//Getters and Setters
-
-//Index Signatures - TS very strict about objs
-
-class SeatAssignment {
-    //index sigs = creating properties dynamically
-    //Index signaure property
-    [seatNumber: string]: string;
-}
-
-let seats = new SeatAssignment();
-seats.A1 = 'Mosh'; // seats[A1] = 'Mosh'
-seats.A2 = 'Josh'
-
-//Static Members
-
-class Ride {
-    private static _activeRides: number = 0; //initate it
-//methods
-    start() {Ride._activeRides++;}
-    stop() {Ride._activeRides--;}
-
-    //public getter
-    static get activeRides() {
-        return Ride._activeRides
-    }
-}
-
-let ride1 = new Ride();
-ride1.start();
-let ride2 = new Ride();
-ride2.start();
-
-console.log(Ride.activeRides);
+// //  account.balance = 1;
 
 
-//Inheritance - shared properties and methods (remmeber DRY), put them in a parent class and let the child/derived/sub inherit them
+// //ready-only and optional properties
 
-class Person {
-    constructor(public firstName: string, public lastName: string) {
-    }
-        get fullName() {
-            return this.firstName + ' ' + this.lastName;
-        }
+// //access control keywords
+// //access modifiers: private, public, and protected
+// // properties are public by default, when private get an error with code below
+// //account.balance = -1; privatre is ONLY for writing robust code, not for storing 'private' data. by convention start name with _ when private
 
-        walk() {
-            console.log('walking')
-        }
-    }
+// //Getters and Setters
 
-class Student extends Person {
-    constructor(public studentId: number, firstName: string, lastName: string) {
-        super(firstName, lastName);
-    }
-    takeTest() {
-        console.log('Taking a test');
+// //Index Signatures - TS very strict about objs
+
+// class SeatAssignment {
+//     //index sigs = creating properties dynamically
+//     //Index signaure property
+//     [seatNumber: string]: string;
+// }
+
+// let seats = new SeatAssignment();
+// seats.A1 = 'Mosh'; // seats[A1] = 'Mosh'
+// seats.A2 = 'Josh'
+
+// //Static Members
+
+// class Ride {
+//     private static _activeRides: number = 0; //initate it
+// //methods
+//     start() {Ride._activeRides++;}
+//     stop() {Ride._activeRides--;}
+
+//     //public getter
+//     static get activeRides() {
+//         return Ride._activeRides
+//     }
+// }
+
+// let ride1 = new Ride();
+// ride1.start();
+// let ride2 = new Ride();
+// ride2.start();
+
+// console.log(Ride.activeRides);
+
+
+// //Inheritance - shared properties and methods (remmeber DRY), put them in a parent class and let the child/derived/sub inherit them
+
+// class Person {
+//     constructor(public firstName: string, public lastName: string) {
+//     }
+//         get fullName() {
+//             return this.firstName + ' ' + this.lastName;
+//         }
+
+//         walk() {
+//             console.log('walking')
+//         }
+//     }
+
+// class Student extends Person {
+//     constructor(public studentId: number, firstName: string, lastName: string) {
+//         super(firstName, lastName);
+//     }
+//     takeTest() {
+//         console.log('Taking a test');
         
+//     }
+// }
+
+// // let student = new Student(1, 'John', 'john@gmail.com');
+
+// //Method Overriding - change something oin herited code
+
+// class Teacher extends Person {
+//     override get fullName() {
+//         return 'Professor ' + super.fullName
+//     }
+// }
+
+// class Principal extends Person {
+//     override get fullName() {
+//         return 'Principal' + super.fullName
+//     }
+// }
+
+// let teacher = new Teacher('Lola', 'Smit')
+
+// console.log(teacher.fullName)
+
+// // can use 'noImplicitOverride'
+
+// //Polymorphism (many forms) - obj can take many different formsß
+
+// printNames([
+//     new Student(1, 'John', 'Smithy'),
+//     new Teacher('BoBo', 'Baggins'),
+//     new Principal('Mary', 'Moop')
+// ])
+
+// function printNames(people: Person[]){
+//     for (let person of people)
+//         console.log(person.fullName);
+        
+// }
+
+// //open close principle - class should be open for extension and closed for modification
+
+// //private vs. protected members - only accessed in class. protected methods are inherited, private methods are not. protected not commonly used, can cause coupling. typically stick to private and public
+
+// //abstract classes and methods
+// //abrstact/simple/not ready?
+// abstract class Shape {
+//     constructor(public color: string) {}
+//     abstract render(): void;
+// }
+
+// class Circle extends Shape {
+//     constructor(public radius: number, color: string) {
+//         super(color)
+//     }
+//     override render(): void {
+//         console.log("rendering a circle");
+        
+//     }
+// }
+
+// // let shape = new Shape('red');
+// // shape.render();
+
+//Interfaces - to define the shape of objects
+
+// abstract class Calendar {
+//     constructor(public name: string){}
+//     abstract addEvent(): void;
+//     abstract removeEvent(): void;
+    
+// }
+//some folks start interface with a capital I (ICalendar)
+//when compiled, nothing in js bc js doesnt havem interfaces o.O woah
+interface Calendar {
+    name: string;
+    addEvent(): void;
+    removeEvent(): void;
+}
+
+interface CloudCalendar extends Calendar {
+    sync(): void;
+}
+
+class GoogleCalendar implements Calendar {
+    constructor(public name: string) {}
+
+    addEvent(): void {
+        throw new Error("Method not implemented.");
+    }
+    removeEvent(): void {
+        throw new Error("Method not implemented.");
     }
 }
 
-// let student = new Student(1, 'John', 'john@gmail.com');
 
-//Method Overriding - change something oin herited code
 
-class Teacher extends Person {
-    override get fullName() {
-        return 'Professor ' + super.fullName
+//Define a class called Logger that takes the name of a file in its constructor and provides a method for writing messages to that file. Don’t worry about the actual file I/O operations. Just define the class with the right members. 
+
+class Logger {
+    constructor(public logFile: string){}
+    log(message: string){};
+}
+//Given the Person class below, create a getter for getting the full name of a person. 
+class Person {
+    constructor(public firstName: string, public lastName: string) {}
+
+    get fullName(){
+        return this.firstName + ' ' + this.lastName
     }
 }
+    //Create a new class called Employee that extends Person and adds a new property called salary.
+    
+    class Employee extends Person {
+        constructor(
+            public salary: number, firstName: string, lastName: string ){
+            super(firstName, lastName)
+        }
+    }
+    
+    //•What is the difference between private and protected members?
+    //ANSWER: both can only be access within the assigned class; however, protected can be inherited so typically we stick to private
+    
+    //•Given the data below, define an interface for representing employees: 
+    
+    let employee = {
+        name:'John Smith',salary:50_000,
+        address:{
+            street:'Flinders st',city:'Melbourne',zipCode:3144,
+        },
+    };
 
-let teacher = new Teacher('Lola', 'Smit')
+    interface Address {
+        street: string;
+        city: number;
+        zipCode: number;
+    }
 
-console.log(teacher.fullName)
-
-// can use 'noImplicitOverride'
+    interface Employee {
+        name: string;
+        salary: number;
+        address: Address;
+    }
