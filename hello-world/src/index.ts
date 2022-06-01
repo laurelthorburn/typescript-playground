@@ -207,62 +207,123 @@
 // reject('...');
 // console.log('Blah')
 
-// Section 2 Exercises
+// // Section 2 Exercises
 
-//Given the data below, define a type alias for representing users.
+// //Given the data below, define a type alias for representing users.
 
-type Users = {
-    name: string,
-    age: number,
-    occupation?: string
+// type Users = {
+//     name: string,
+//     age: number,
+//     occupation?: string
+// };
+
+// let users = [
+//     {
+//     name:'John Smith',
+//     age:30,
+//     occupation:'Software engineer'
+// },
+// {
+//     name:'Kate Müller',
+//     age:28
+// }
+// ];
+
+// //•Birds fly. Fish swim. A Pet can be a Bird or Fish. Use type aliases to represent these 
+
+// type Bird = {
+//     fly: () => void;
+// }
+// type Fish = {
+//     swim: () => void;
+// }
+
+// type Pet = Bird | Fish;
+
+// //•Define a type for representing the days of week. Valid values are “Monday”, “Tuesday”, etc.
+
+// type DayOfWeek = 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday' | 'Sunday' ;
+
+// //•Simplify the following code snippets:
+// // let user = getUser();
+// // console.log(user && user.address?user.address.street: undefined);
+// let user = getUser();
+// console.log(user?.address?.street);
+
+
+// // let x = foo !== null && foo !== undefined ? foo:bar();
+
+// let x = foo ?? bar();
+
+
+// //•What is the problem in this piece of code?
+// // let value: unknown = 'a'; 
+// // console.log(value.toUpperCase());
+
+// //value is set to unknown so you are calling a method that assumes it will be passed a string, what happens if it isn't? We need to use type narrowing to cartch the various types.. like  typeof === 'string' thennn you can use those string methods
+
+// let value: unknown = 'a'; 
+// if (typeof value === 'string')
+//     console.log(value.toUpperCase());
+
+// OOP
+// method = function within an object
+
+//Creating Classes
+
+class Account {
+    // readonly id: number; //readonly aka no touchy
+    // owner: string;
+    // private _balance: number;
+    nickname?: string; //optional property
+
+    //constructor - special method inside class for intiializing an onject
+    constructor(
+        public readonly id: number,
+        public owner:string,
+        private _balance: number) {
+        // this.id = id;
+        // this.owner = owner;
+        // this._balance = balance;
+    }
+    deposit(amount:number): void {
+        if (amount <= 0)
+            throw new Error('Invalid amount');
+            //Record transaction
+        this._balance += amount;
+    }
+    get balance():number {
+        return this._balance;
+    }
+    // set balance(value: number){
+    //     if (value < 0)
+    //         throw new Error('Invalid Error');
+    //         this._balance = value;
+    // }
+    // private calculateTax(): void {
+
+    // }
 };
 
-let users = [
-    {
-    name:'John Smith',
-    age:30,
-    occupation:'Software engineer'
-},
-{
-    name:'Kate Müller',
-    age:28
-}
-];
+//Creating Objects
+let account = new Account(1, 'Mosh', 0);
+account.deposit(100)
+// console.log(account._balance); //throws error now bc we made it private, created method above thatg returns it
+// console.log(account.getBalance());
+console.log(account.balance)
+console.log(typeof account);
+console.log(account instanceof Account);
 
-//•Birds fly. Fish swim. A Pet can be a Bird or Fish. Use type aliases to represent these 
-
-type Bird = {
-    fly: () => void;
-}
-type Fish = {
-    swim: () => void;
-}
-
-type Pet = Bird | Fish;
-
-//•Define a type for representing the days of week. Valid values are “Monday”, “Tuesday”, etc.
-
-type DayOfWeek = 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday' | 'Sunday' ;
-
-//•Simplify the following code snippets:
-// let user = getUser();
-// console.log(user && user.address?user.address.street: undefined);
-let user = getUser();
-console.log(user?.address?.street);
+//  account.balance = 1;
 
 
-// let x = foo !== null && foo !== undefined ? foo:bar();
+//ready-only and optional properties
 
-let x = foo ?? bar();
+//access control keywords
+//access modifiers: private, public, and protected
+// properties are public by default, when private get an error with code below
+//account.balance = -1; privatre is ONLY for writing robust code, not for storing 'private' data. by convention start name with _ when private
 
+//Getters and Setters
 
-//•What is the problem in this piece of code?
-// let value: unknown = 'a'; 
-// console.log(value.toUpperCase());
-
-//value is set to unknown so you are calling a method that assumes it will be passed a string, what happens if it isn't? We need to use type narrowing to cartch the various types.. like  typeof === 'string' thennn you can use those string methods
-
-let value: unknown = 'a'; 
-if (typeof value === 'string')
-    console.log(value.toUpperCase());
-
+//Index Signatures
