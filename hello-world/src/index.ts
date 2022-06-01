@@ -326,4 +326,76 @@ console.log(account instanceof Account);
 
 //Getters and Setters
 
-//Index Signatures
+//Index Signatures - TS very strict about objs
+
+class SeatAssignment {
+    //index sigs = creating properties dynamically
+    //Index signaure property
+    [seatNumber: string]: string;
+}
+
+let seats = new SeatAssignment();
+seats.A1 = 'Mosh'; // seats[A1] = 'Mosh'
+seats.A2 = 'Josh'
+
+//Static Members
+
+class Ride {
+    private static _activeRides: number = 0; //initate it
+//methods
+    start() {Ride._activeRides++;}
+    stop() {Ride._activeRides--;}
+
+    //public getter
+    static get activeRides() {
+        return Ride._activeRides
+    }
+}
+
+let ride1 = new Ride();
+ride1.start();
+let ride2 = new Ride();
+ride2.start();
+
+console.log(Ride.activeRides);
+
+
+//Inheritance - shared properties and methods (remmeber DRY), put them in a parent class and let the child/derived/sub inherit them
+
+class Person {
+    constructor(public firstName: string, public lastName: string) {
+    }
+        get fullName() {
+            return this.firstName + ' ' + this.lastName;
+        }
+
+        walk() {
+            console.log('walking')
+        }
+    }
+
+class Student extends Person {
+    constructor(public studentId: number, firstName: string, lastName: string) {
+        super(firstName, lastName);
+    }
+    takeTest() {
+        console.log('Taking a test');
+        
+    }
+}
+
+// let student = new Student(1, 'John', 'john@gmail.com');
+
+//Method Overriding - change something oin herited code
+
+class Teacher extends Person {
+    override get fullName() {
+        return 'Professor ' + super.fullName
+    }
+}
+
+let teacher = new Teacher('Lola', 'Smit')
+
+console.log(teacher.fullName)
+
+// can use 'noImplicitOverride'
